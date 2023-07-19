@@ -1,0 +1,35 @@
+:root {
+	--primary-text-color: #3a4446;
+}
+
+body {
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	background-color: #b7d5d9;
+	color: var(--primary-text-color);
+}
+
+header {
+	display: flex;
+	justify-content: space-around;
+	font-size: 30px;
+	margin: 25px 0;
+}
+
+header a {
+	text-decoration: none;
+	color: var(--primary-text-color);
+}
+
+#main {
+    padding-top: 100px;
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+}
+
+main section {
+    display: flex;
+    border: solid 7px var(--primary-text-color);
+    height: 500px;
+    width: 700px;
+}
