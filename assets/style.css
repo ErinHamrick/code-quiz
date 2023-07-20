@@ -13,12 +13,19 @@ header {
 	display: flex;
 	justify-content: space-around;
 	font-size: 40px;
+	font-weight: bold;
 	margin: 25px 0;
 }
 
 header a {
 	text-decoration: none;
 	color: var(--primary-text-color);
+}
+
+header a:hover,
+header a:target {
+	font-size: 42px;
+	filter: brightness(50%);
 }
 
 #main {
@@ -35,7 +42,7 @@ main section {
 	justify-content: center;
 	border: solid 7px var(--primary-text-color);
 	border-radius: 10px;
-	height: 300px;
+	height: 500px;
 	width: 700px;
 	padding-top: 30px;
 }
@@ -44,13 +51,13 @@ main section h1 {
 	margin-top: 5%;
 	font-size: 50px;
 	position: relative;
-	left: 5%;
 }
 
+main section p {
+	font-size: larger;
+	margin: 25px;
+}
 #button {
-	position: relative;
-	top: 50%;
-	right: 170%;
 	background-color: var(--primary-text-color);
 	color: var(--background-color);
 	height: 50px;
