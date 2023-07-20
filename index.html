@@ -7,22 +7,24 @@
 	</head>
 	<body>
 		<header>
-			<a href="./assets/scores.html"> View Highscores</a> <span id="timer">Timer</span>
+			<a href="./assets/scores.html"> View Highscores</a>
+			<span id="timer">Time: </span>
 		</header>
 		<main id="main">
 			<section>
 				<h1>Coding Quiz Challenge</h1>
-
 				<p>
-					Try to answer these coding-related questions within the time
-					limit. Wrong answers will deduct 15 seconds from the timer.
+					Try to answer these code-related questions within the time limit.
+					Incorrect answers will deduct 15 seconds from the timer.
 				</p>
-				<button id="button">Start Quiz</button>
+				<button id="start">Start Quiz</button>
 			</section>
-
-			<div>
-
+			<div id="questions" class="hidden">
+				<h2 id="question-asked"></h2>
+				<div id="options" class="options"></div>
 			</div>
 		</main>
+		<script src="./assets/logic.js"></script>
+		<script src="./assets/questions.js"></script>
 	</body>
 </html>

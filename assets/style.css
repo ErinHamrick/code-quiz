@@ -54,10 +54,11 @@ main section h1 {
 }
 
 main section p {
-	font-size: larger;
-	margin: 25px;
+	font-size: 30px;
+	margin-left: 30px;
+	margin-right: 25px;
 }
-#button {
+#start {
 	background-color: var(--primary-text-color);
 	color: var(--background-color);
 	height: 50px;
@@ -66,7 +67,7 @@ main section p {
 	border-radius: 10px;
 }
 
-#button:hover,
-#button:focus {
+#start:hover,
+#start:focus {
 	filter: brightness(120%);
 }
