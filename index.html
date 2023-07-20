@@ -6,24 +6,33 @@
 		<link rel="stylesheet" href="./assets/style.css" />
 	</head>
 	<body>
-		<header>
+		<div id="header">
 			<a href="./assets/scores.html"> View Highscores</a>
 			<span id="timer">Time: </span>
-		</header>
+		</div>
 		<main id="main">
-			<section>
-				<h1>Coding Quiz Challenge</h1>
-				<p>
-					Try to answer these code-related questions within the time limit.
-					Incorrect answers will deduct 15 seconds from the timer.
-				</p>
-				<button id="start">Start Quiz</button>
-			</section>
+			<h1>Coding Quiz Challenge</h1>
+			<p>
+				Try to answer these code-related questions within the time limit.
+				Incorrect answers will deduct 15 seconds from the timer.
+			</p>
+			<button id="start">Start Quiz</button>
+		</main>
+		<section>
 			<div id="questions" class="hidden">
 				<h2 id="question-asked"></h2>
 				<div id="options" class="options"></div>
 			</div>
-		</main>
+			<div id="game-over">
+<p>Game Over!  Your score is: </p>
+<p>Enter Initials <input type="text" id="initials">
+<button id="submit">Submit</button></p>
+			</div>
+			<div>
+
+			</div>	
+
+		</section>
 		<script src="./assets/logic.js"></script>
 		<script src="./assets/questions.js"></script>
 	</body>
