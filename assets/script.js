@@ -8,6 +8,9 @@ let mainEl = document.getElementById("main");
 let questionAskedEL = document.getElementById("question-asked");
 let optionsEl = document.getElementById("options");
 let quizEl = document.getElementById("quiz");
+let responseBtn = document.getElementById("response-button");
+let correctBtn = document.getElementById("correct");
+let wrongBtn = document.getElementById("wrong");
 
 const questions = [
 	{
@@ -41,8 +44,8 @@ const questions = [
 		questionAsked:
 			"How can you get the total number of arguments passed to a function?",
 		options: [
-			"Using args.length property",
-			"Using arguments.length property",
+			"Using the args.length property",
+			"Using the arguments.length property",
 			"Both of the above",
 			"None of the above",
 		],
@@ -60,6 +63,7 @@ function startQuiz() {
 	quizEl.setAttribute("class", "");
 	questionAskedEL.setAttribute("class", "");
 	mainEl.setAttribute("class", "hidden");
+
 	questionAskedEL.innerHTML = questions[currentIndex].questionAsked;
 	optionsEl.innerHTML = "";
 	for (let i = 0; i < questions[currentIndex].options.length; i++) {
@@ -72,18 +76,25 @@ function startQuiz() {
 optionsEl.addEventListener("click", (e) => {
 	console.log(e.target.textContent);
 	if (e.target.textContent === questions[currentIndex].answer) {
-		// let button = document.createElement("button");
-		// button.textContent = "Correct!";
-		// quizEl.append(button);
+		correctBtn.setAttribute("class", "");
+		setInterval(() => {
+			correctBtn.setAttribute("class", "hidden");
+			clearInterval;
+		}, 1000);
 		currentIndex++;
 	} else {
-		console.log("wrong");
+        wrongBtn.setAttribute("class", "");
+        setInterval(() => {
+            wrongBtn.setAttribute("class", "hidden");
+            clearInterval;
+        }, 1000);
 		currentIndex++;
-		if (timeLeft > 15) {
-			timeLeft -= 15;
-		} else {
-			timeLeft = 0;
-		}
+	}
+
+	if (timeLeft > 15) {
+		timeLeft -= 15;
+	} else {
+		timeLeft = 0;
 	}
 	startQuiz();
 });
@@ -97,7 +108,7 @@ startButton.addEventListener("click", () => {
 			timerEl.textContent = timeLeft + " second remaining";
 			timeLeft--;
 		} else {
-			timerEl.textContent = "Time up";
+			timerEl.textContent = "Out of time";
 			alert("TIME UP!");
 			clearInterval(timeInterval);
 		}
