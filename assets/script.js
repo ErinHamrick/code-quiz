@@ -116,11 +116,11 @@ startButton.addEventListener("click", () => {
 	startQuiz();
 });
 
-// if (timeLeft === 0 || questionAskedEL.currentIndex === "") {
-// 	timeLeft = 0;
-// 	quizEl.setAttribute("class", "hidden");
-// 	endEL.setAttribute("class", "");
-// }
+if (timeLeft === 0 || questionsEl.currentIndex === "") {
+	timeLeft = 0;
+	quizEl.setAttribute("class", "hidden");
+	endEL.setAttribute("class", "");
+}
 
 submitBtn.addEventListener("click", function renderInitials() {
 	let li = document.createElement("li");
