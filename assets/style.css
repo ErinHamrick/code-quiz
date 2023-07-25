@@ -107,6 +107,7 @@ main,
 	font-size: 18px;
 	border-radius: 10px;
 }
+
 #highscores {
 	margin-top: 100px;
 	display: flex;
@@ -115,7 +116,7 @@ main,
 	border: solid 7px var(--primary-text-color);
 	border-radius: 10px;
 	min-height: 250px;
-	max-height: 700px;
+	max-height: 300px;
 	width: 700px;
 }
 h2 {

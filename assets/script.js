@@ -14,7 +14,7 @@ let wrongBtn = document.getElementById("wrong");
 let highscoresEl = document.getElementById("highscores");
 let listEl = document.getElementById("list");
 let initialsEl = document.getElementById("initials").value;
-let endEL = document.getElementById("end");
+let endEl = document.getElementById("end");
 
 const questions = [
 	{
@@ -70,12 +70,13 @@ function startQuiz() {
 
 	questionAskedEL.innerHTML = questions[currentIndex].questionAsked;
 	optionsEl.innerHTML = "";
+
 	for (let i = 0; i < questions[currentIndex].options.length; i++) {
 		let button = document.createElement("button");
 		button.textContent = questions[currentIndex].options[i];
 		optionsEl.append(button);
-	}
-}
+		}
+    }
 
 optionsEl.addEventListener("click", (e) => {
 	console.log(e.target.textContent);
@@ -84,7 +85,7 @@ optionsEl.addEventListener("click", (e) => {
 		setInterval(() => {
 			correctBtn.setAttribute("class", "hidden");
 			clearInterval;
-		}, 2000);
+		}, 1500);
 		currentIndex++;
 	} else {
 		timeLeft -= 15;
@@ -92,7 +93,7 @@ optionsEl.addEventListener("click", (e) => {
 		setInterval(() => {
 			wrongBtn.setAttribute("class", "hidden");
 			clearInterval;
-		}, 2000);
+		}, 1500);
 		currentIndex++;
 	}
 
@@ -109,18 +110,21 @@ startButton.addEventListener("click", () => {
 			timeLeft--;
 		} else {
 			timerEl.textContent = "Out of time";
-			alert("ALL DONE!");
 			clearInterval(timeInterval);
 		}
 	}, 1000);
 	startQuiz();
 });
 
-if (timeLeft === 0 || questionsEl.currentIndex === "") {
-	timeLeft = 0;
-	quizEl.setAttribute("class", "hidden");
-	endEL.setAttribute("class", "");
+function endQuiz() {
+    quizEl.setAttribute("class", "hidden");
+    endEl.removeAttribute("class");
+    let scoreEl = document.getElementById("score");
+    scoreEl.textContent = timeLeft;
+    clearInterval(timerEl)
+
 }
+
 
 submitBtn.addEventListener("click", function renderInitials() {
 	let li = document.createElement("li");
