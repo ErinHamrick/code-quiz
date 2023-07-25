@@ -75,29 +75,31 @@ function startQuiz() {
 		let button = document.createElement("button");
 		button.textContent = questions[currentIndex].options[i];
 		optionsEl.append(button);
-		}
-    }
+	}
+}
 
 optionsEl.addEventListener("click", (e) => {
 	console.log(e.target.textContent);
 	if (e.target.textContent === questions[currentIndex].answer) {
+		checkIfEnd();
 		correctBtn.setAttribute("class", "");
 		setInterval(() => {
 			correctBtn.setAttribute("class", "hidden");
 			clearInterval;
 		}, 1500);
 		currentIndex++;
+		startQuiz();
 	} else {
 		timeLeft -= 15;
+		checkIfEnd();
 		wrongBtn.setAttribute("class", "");
 		setInterval(() => {
 			wrongBtn.setAttribute("class", "hidden");
 			clearInterval;
 		}, 1500);
 		currentIndex++;
+		startQuiz();
 	}
-
-	startQuiz();
 });
 
 startButton.addEventListener("click", () => {
@@ -111,20 +113,24 @@ startButton.addEventListener("click", () => {
 		} else {
 			timerEl.textContent = "Out of time";
 			clearInterval(timeInterval);
+			checkIfEnd();
 		}
 	}, 1000);
 	startQuiz();
 });
 
 function endQuiz() {
-    quizEl.setAttribute("class", "hidden");
-    endEl.removeAttribute("class");
-    let scoreEl = document.getElementById("score");
-    scoreEl.textContent = timeLeft;
-    clearInterval(timerEl)
-
+	quizEl.setAttribute("class", "hidden");
+	endEl.removeAttribute("class", "hidden");
+	let scoreEl = document.getElementById("score");
+	scoreEl.textContent = timeLeft;
+	return;
 }
-
+function checkIfEnd() {
+	if (timeLeft <= 0 || currentIndex > questions.length) {
+		endQuiz();
+	}
+}
 
 submitBtn.addEventListener("click", function renderInitials() {
 	let li = document.createElement("li");
