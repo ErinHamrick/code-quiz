@@ -11,6 +11,10 @@ let quizEl = document.getElementById("quiz");
 let responseBtn = document.getElementById("response-button");
 let correctBtn = document.getElementById("correct");
 let wrongBtn = document.getElementById("wrong");
+let highscoresEl = document.getElementById("highscores");
+let listEl = document.getElementById("list");
+let initialsEl = document.getElementById("initials").value;
+let endEL = document.getElementById("end");
 
 const questions = [
 	{
@@ -49,7 +53,7 @@ const questions = [
 			"Both of the above",
 			"None of the above",
 		],
-		answer: "Using arguments.length property",
+		answer: "Using the arguments.length property",
 	},
 	{
 		questionAsked:
@@ -80,22 +84,18 @@ optionsEl.addEventListener("click", (e) => {
 		setInterval(() => {
 			correctBtn.setAttribute("class", "hidden");
 			clearInterval;
-		}, 1000);
+		}, 2000);
 		currentIndex++;
 	} else {
-        wrongBtn.setAttribute("class", "");
-        setInterval(() => {
-            wrongBtn.setAttribute("class", "hidden");
-            clearInterval;
-        }, 1000);
+		timeLeft -= 15;
+		wrongBtn.setAttribute("class", "");
+		setInterval(() => {
+			wrongBtn.setAttribute("class", "hidden");
+			clearInterval;
+		}, 2000);
 		currentIndex++;
 	}
 
-	if (timeLeft > 15) {
-		timeLeft -= 15;
-	} else {
-		timeLeft = 0;
-	}
 	startQuiz();
 });
 
@@ -109,9 +109,20 @@ startButton.addEventListener("click", () => {
 			timeLeft--;
 		} else {
 			timerEl.textContent = "Out of time";
-			alert("TIME UP!");
+			alert("ALL DONE!");
 			clearInterval(timeInterval);
 		}
 	}, 1000);
 	startQuiz();
+});
+
+// if (timeLeft === 0 || questionAskedEL.currentIndex === "") {
+// 	timeLeft = 0;
+// 	quizEl.setAttribute("class", "hidden");
+// 	endEL.setAttribute("class", "");
+// }
+
+submitBtn.addEventListener("click", function renderInitials() {
+	let li = document.createElement("li");
+	li.textContent = initialsEl;
 });
