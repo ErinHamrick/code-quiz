@@ -1,4 +1,4 @@
-const startButton = document.getElementById("start");
+let startButton = document.getElementById("start");
 let timerEl = document.getElementById("timer");
 let timeLeft = 60;
 timerEl.textContent = "Timer: 60 seconds";
@@ -16,6 +16,8 @@ let listEl = document.getElementById("list");
 let initialsEl = document.getElementById("initials").value;
 let endEl = document.getElementById("end");
 let submitBtn = document.getElementById("submit");
+let scoreEl = document.getElementById("score");
+let timeInterval;
 
 let questions = [
 	{
@@ -65,6 +67,8 @@ let questions = [
 ];
 
 function startQuiz() {
+	timeInterval = setInterval(countdown, 1000);
+	timerEl.textContent = timeLeft;
 	quizEl.setAttribute("class", "");
 	questionAskedEL.setAttribute("class", "");
 	mainEl.setAttribute("class", "hidden");
@@ -83,6 +87,7 @@ function showQuestion() {
 
 function checkIfEnd() {
 	if (timeLeft <= 0 || currentIndex === questions.length) {
+		clearInterval(timeInterval);
 		endQuiz();
 	} else {
 		showQuestion();
@@ -102,31 +107,14 @@ optionsEl.addEventListener("click", (e) => {
 	}
 });
 
-startButton.addEventListener("click", () => {
-	let timeInterval = setInterval(() => {
-		if (timeLeft > 1) {
-			timerEl.textContent = timeLeft + " seconds remaining";
-			timeLeft--;
-		} else if (timeLeft === 1) {
-			timerEl.textContent = timeLeft + " second remaining";
-			timeLeft--;
-			} else if (timeLeft <= 0) {
-				timeLeft = 0;
-			} else {
-			timerEl.textContent = "Out of time";
-			clearInterval(timerEl);
-			// checkIfEnd();
-		}
-	}, 1000);
-	startQuiz();
-});
+startButton.addEventListener("click", startQuiz());
 
 function endQuiz() {
+	clearInterval(timeInterval);
 	quizEl.setAttribute("class", "hidden");
 	endEl.removeAttribute("class", "hidden");
-	let scoreEl = document.getElementById("score");
 	scoreEl.textContent = timeLeft;
-	document.getElementById("timer").setAttribute("class", "hidden"); 
+	document.getElementById("timer").setAttribute("class", "hidden");
 }
 
 function saveScore() {
@@ -143,4 +131,3 @@ function saveScore() {
 }
 
 submitBtn.addEventListener("click", saveScore);
-submitBtn.addEventListener("click", init);
