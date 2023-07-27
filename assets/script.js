@@ -81,17 +81,24 @@ function showQuestion() {
 	}
 }
 
+function checkIfEnd() {
+	if (timeLeft <= 0 || currentIndex === questions.length) {
+		endQuiz();
+	} else {
+		showQuestion();
+	}
+}
+
 optionsEl.addEventListener("click", (e) => {
+	e.preventDefault();
 	console.log(e.target.textContent);
 	if (e.target.textContent === questions[currentIndex].answer) {
-		checkIfEnd();
 		currentIndex++;
-		showQuestion();
+		checkIfEnd();
 	} else {
 		timeLeft -= 15;
-		checkIfEnd();
 		currentIndex++;
-		showQuestion();
+		checkIfEnd();
 	}
 });
 
@@ -108,7 +115,7 @@ startButton.addEventListener("click", () => {
 			// } else {
 			timerEl.textContent = "Out of time";
 			clearInterval(timerEl);
-			checkIfEnd();
+			// checkIfEnd();
 		}
 	}, 1000);
 	startQuiz();
@@ -119,6 +126,8 @@ function endQuiz() {
 	endEl.removeAttribute("class", "hidden");
 	let scoreEl = document.getElementById("score");
 	scoreEl.textContent = timeLeft;
+	// clearInterval(timerEl);
+	document.getElementById("timer").setAttribute("class", "hidden");
 }
 
 function saveScore() {
@@ -132,14 +141,6 @@ function saveScore() {
 	localStorage.setItem("scores", JSON.stringify(highscores));
 
 	window.location.href = "highscores.html";
-}
-
-function checkIfEnd() {
-	if (timeLeft <= 0 || currentIndex === questions.length) {
-		endQuiz();
-	} else {
-		showQuestion();
-	}
 }
 
 submitBtn.addEventListener("click", saveScore);
