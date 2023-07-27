@@ -15,8 +15,9 @@ let highscoresEl = document.getElementById("highscores");
 let listEl = document.getElementById("list");
 let initialsEl = document.getElementById("initials").value;
 let endEl = document.getElementById("end");
+let submitBtn = document.getElementById("submit");
 
-const questions = [
+let questions = [
 	{
 		questionAsked: "Which built-in method returns the length of a string?",
 		options: ["length()", "size()", "index()", "none of the above"],
@@ -67,7 +68,9 @@ function startQuiz() {
 	quizEl.setAttribute("class", "");
 	questionAskedEL.setAttribute("class", "");
 	mainEl.setAttribute("class", "hidden");
-
+	showQuestion();
+}
+function showQuestion() {
 	questionAskedEL.innerHTML = questions[currentIndex].questionAsked;
 	optionsEl.innerHTML = "";
 
@@ -82,23 +85,13 @@ optionsEl.addEventListener("click", (e) => {
 	console.log(e.target.textContent);
 	if (e.target.textContent === questions[currentIndex].answer) {
 		checkIfEnd();
-		correctBtn.setAttribute("class", "");
-		setInterval(() => {
-			correctBtn.setAttribute("class", "hidden");
-			clearInterval;
-		}, 1500);
 		currentIndex++;
-		startQuiz();
+		showQuestion();
 	} else {
 		timeLeft -= 15;
 		checkIfEnd();
-		wrongBtn.setAttribute("class", "");
-		setInterval(() => {
-			wrongBtn.setAttribute("class", "hidden");
-			clearInterval;
-		}, 1500);
 		currentIndex++;
-		startQuiz();
+		showQuestion();
 	}
 });
 
@@ -110,9 +103,11 @@ startButton.addEventListener("click", () => {
 		} else if (timeLeft === 1) {
 			timerEl.textContent = timeLeft + " second remaining";
 			timeLeft--;
-		} else {
+			// } else if (timeLeft <= 0) {
+			// 	timeLeft = 0;
+			// } else {
 			timerEl.textContent = "Out of time";
-			clearInterval(timeInterval);
+			clearInterval(timerEl);
 			checkIfEnd();
 		}
 	}, 1000);
@@ -124,15 +119,28 @@ function endQuiz() {
 	endEl.removeAttribute("class", "hidden");
 	let scoreEl = document.getElementById("score");
 	scoreEl.textContent = timeLeft;
-	return;
 }
+
+function saveScore() {
+	let highscores = JSON.parse(localStorage.getItem("scores")) || [];
+	let score = {
+		name: initialsEl.value,
+		score: timeLeft,
+	};
+
+	highscores.push(score);
+	localStorage.setItem("scores", JSON.stringify(highscores));
+
+	window.location.href = "highscores.html";
+}
+
 function checkIfEnd() {
-	if (timeLeft <= 0 || currentIndex > questions.length) {
+	if (timeLeft <= 0 || currentIndex === questions.length) {
 		endQuiz();
+	} else {
+		showQuestion();
 	}
 }
 
-submitBtn.addEventListener("click", function renderInitials() {
-	let li = document.createElement("li");
-	li.textContent = initialsEl;
-});
+submitBtn.addEventListener("click", saveScore);
+submitBtn.addEventListener("click", init);
