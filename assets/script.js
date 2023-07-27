@@ -110,9 +110,9 @@ startButton.addEventListener("click", () => {
 		} else if (timeLeft === 1) {
 			timerEl.textContent = timeLeft + " second remaining";
 			timeLeft--;
-			// } else if (timeLeft <= 0) {
-			// 	timeLeft = 0;
-			// } else {
+			} else if (timeLeft <= 0) {
+				timeLeft = 0;
+			} else {
 			timerEl.textContent = "Out of time";
 			clearInterval(timerEl);
 			// checkIfEnd();
@@ -126,8 +126,7 @@ function endQuiz() {
 	endEl.removeAttribute("class", "hidden");
 	let scoreEl = document.getElementById("score");
 	scoreEl.textContent = timeLeft;
-	// clearInterval(timerEl);
-	document.getElementById("timer").setAttribute("class", "hidden");
+	document.getElementById("timer").setAttribute("class", "hidden"); 
 }
 
 function saveScore() {
