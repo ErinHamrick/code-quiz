@@ -13,7 +13,7 @@ let correctBtn = document.getElementById("correct");
 let wrongBtn = document.getElementById("wrong");
 let highscoresEl = document.getElementById("highscores");
 let listEl = document.getElementById("list");
-let initialsEl = document.getElementById("initials").value;
+let initialsEl = document.getElementById("initials");
 let endEl = document.getElementById("end");
 let submitBtn = document.getElementById("submit");
 let scoreEl = document.getElementById("score");
@@ -67,8 +67,6 @@ let questions = [
 ];
 
 function startQuiz() {
-	timeInterval = setInterval(countdown, 1000);
-	timerEl.textContent = timeLeft;
 	quizEl.setAttribute("class", "");
 	questionAskedEL.setAttribute("class", "");
 	mainEl.setAttribute("class", "hidden");
@@ -107,12 +105,31 @@ optionsEl.addEventListener("click", (e) => {
 	}
 });
 
-startButton.addEventListener("click", startQuiz());
+startButton.addEventListener("click", () => {
+	timeInterval = setInterval(() => {
+		if (timeLeft > 1) {
+			timerEl.textContent = timeLeft + " seconds remaining";
+			timeLeft--;
+		} else if (timeLeft === 1) {
+			timerEl.textContent = timeLeft + " second remaining";
+			timeLeft--;
+		} else if (timeLeft <= 0) {
+			timeLeft = 0;
+			} else if (currentIndex === questions.length) {
+				clearInterval(timerEl);
+		} else {
+			timerEl.textContent = "Out of time";
+			clearInterval(timeInterval);
+			checkIfEnd();
+		}
+	}, 1000);
+	startQuiz();
+});
 
 function endQuiz() {
-	clearInterval(timeInterval);
 	quizEl.setAttribute("class", "hidden");
 	endEl.removeAttribute("class", "hidden");
+
 	scoreEl.textContent = timeLeft;
 	document.getElementById("timer").setAttribute("class", "hidden");
 }
