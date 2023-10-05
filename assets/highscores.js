@@ -13,3 +13,4 @@ document.querySelector("#clear").addEventListener("click", function () {
 	localStorage.clear();
 	window.location.reload();
 });
+ 
